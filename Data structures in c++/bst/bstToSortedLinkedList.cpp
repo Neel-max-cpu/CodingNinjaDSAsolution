@@ -211,6 +211,7 @@ pair<Node<int>*, Node<int>*> helper2(BinaryTreeNode<int>* root){
 Node<int>* constructLinkedList(BinaryTreeNode<int>* root) {
 	// Write your code here
 	pair<Node<int>*, Node<int>*> ans = helper(root);
+	return ans.first;
 
 }
 
