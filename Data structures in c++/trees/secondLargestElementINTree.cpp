@@ -140,8 +140,25 @@ TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
 
 
 // METHOD 2 ----------
+
+void getSecondLargestNodeHelper(TreeNode<int>* root, TreeNode<int>*& largest, TreeNode<int>*& second) {
+    if (!root) return;
+
+    if (!largest || root->data > largest->data) {
+        second = largest;
+        largest = root;
+    } else if ((!second || root->data > second->data) && root != largest) {
+        second = root;
+    }
+
+    for (int i = 0; i < root->children.size(); i++) {
+        getSecondLargestNodeHelper(root->children[i], largest, second);
+    }
+}
 TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
     // Write your code here
+
+    // using queue ---
     if(root == NULL) return NULL;
     int childCount = root->children.size();
     if(childCount == 0) return NULL;
@@ -167,6 +184,18 @@ TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
     }
     // if secondLargest == INT_MIN return Null else return second largest
     return secondLargest->data==INT_MIN?NULL:secondLargest;
+
+
+
+    // using recursion --
+    if (!root) return nullptr;
+
+    TreeNode<int>* largest = nullptr;
+    TreeNode<int>* second = nullptr;
+
+    getSecondLargestNodeHelper(root, largest, second);
+
+    return second;
 }
 
 TreeNode<int>* takeInputLevelWise() {
