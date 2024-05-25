@@ -37,11 +37,23 @@ void removeAllOccurrencesOfChar(string input, char c)
 using namespace std;
 
 void removeAllOccurrencesOfChar(string input, char c) 
-{
+{    
+    // skipping --
+    /*
     for(char it:input){
         if(it==c) continue;
         else cout<<it;
     }
+    */
+    int i = 0;
+    while (i < input.length()) {
+        if (input[i] == c) {
+            input.erase(i, 1);
+        } else {
+            i++;
+        }
+    }
+    cout << input;
 }
 
 int main(){
