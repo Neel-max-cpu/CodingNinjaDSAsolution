@@ -44,6 +44,37 @@ using namespace std;
 #include<climits>
 using namespace std;
 
+
+
+int helper_from_teaching_new_method(string s, string v, int m, int n, vector<vector<int>>&dp){
+    if(m==0)
+     return 1001;
+     if(n<=0)
+     {
+         return 1;
+     }
+
+    if(dp[n][m] != -1) return dp[n][m];
+
+     int i;
+     for( i=0;i<n;i++)
+     {
+         if(v[i]==s[0])
+         break;
+     }
+     if(i==n){
+     dp[n][m] = 1;
+     return dp[n][m];
+
+     }
+
+     int a=helper_from_teaching_new_method(s.substr(1),v, m-1, n, dp );
+     int b=1+helper_from_teaching_new_method(s.substr(1), v.substr(i+1), m-1, n-i-1, dp);
+     dp[n][m] = min(a,b);
+     return dp[n][m];
+}
+
+
 // string helper_rec(string s, string v, int i, int j){
 int helper_rec(string s, string v, int m, int n) {
     // base cases
@@ -103,6 +134,16 @@ int solve(string s, string v) {
     int m = s.length();
     int n = v.length();
 
+    
+     /* ---- see here recursion same just remove the dp, and why n+1, m+1, instead of m+1, n+1 working here ---- see mine for different
+    int m=s.length();
+     int n=v.length();
+    vector<vector<int>>dp(n+1, vector<int>(m+1, -1));
+    int ans = helper_from_teaching_new_method(s, v, m, n, dp);
+    return ans;
+    */
+
+    
     // recursion ---
     /*
     return helper_rec(s, v, m, n);
