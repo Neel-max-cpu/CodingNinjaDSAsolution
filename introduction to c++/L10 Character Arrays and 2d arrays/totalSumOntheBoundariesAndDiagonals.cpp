@@ -54,8 +54,24 @@ int totalSum(int input[][501], int n)
     for(int i=0; i<n; i++) sum+=input[0][i];
 
 
+// others' answer
 
+int sum=0;
+for (int i = 0; i < n; i++) {
+      sum += input[0][i];
+      sum += input[n - 1][i];
+      sum += input[i][0];
+      sum += input[i][n - 1];
+      sum += input[i][i];
+      sum += input[i][n - 1 - i];
+    }
 
+    sum-=2*(input[0][0]+input[0][n-1]+input[n-1][n-1]+input[n-1][0]);
+    
+    if(n%2!=0){
+        sum-=input[n/2][n/2];
+    }
+    return sum;
 
 
 
