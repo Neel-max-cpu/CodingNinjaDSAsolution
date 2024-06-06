@@ -44,7 +44,7 @@ Sample Output 2:
 273
 int totalSum(int input[][501], int n)
 {
-    //Write your code here
+     //Write your code here
     // int i = 0, j = 0;
     int sum = 0;
 
@@ -52,10 +52,40 @@ int totalSum(int input[][501], int n)
     
     // top 
     for(int i=0; i<n; i++) sum+=input[0][i];
+    // bottom
+    for(int i=0; i<n; i++) sum+=input[n-1][i];
+    // left
+    for(int i=0; i<n; i++) sum+=input[i][0];
+    // right
+    for(int i=0; i<n; i++) sum+=input[i][n-1];
 
 
-// others' answer
+    // DIAGONALS
+    int j = 0;
 
+    // left to right(up to bottom)
+    for(int i=0; i<n; i++){
+        sum+=input[j][i];
+        j++;
+    }
+
+    // right to left(bottom to up)
+    j = n-1;
+    for(int i=0; i<n; i++){
+        sum+=input[j][i];
+        j--;
+    }
+
+
+    sum = sum - 2*(input[0][0] + input[0][n-1] + input[n-1][0] + input[n-1][n-1]);
+    if(n%2==1){
+        sum -= input[n/2][n/2];
+    }
+
+    return  sum;
+
+
+// others' answer-----
 int sum=0;
 for (int i = 0; i < n; i++) {
       sum += input[0][i];
@@ -64,14 +94,14 @@ for (int i = 0; i < n; i++) {
       sum += input[i][n - 1];
       sum += input[i][i];
       sum += input[i][n - 1 - i];
-    }
+}
 
-    sum-=2*(input[0][0]+input[0][n-1]+input[n-1][n-1]+input[n-1][0]);
+sum-=2*(input[0][0]+input[0][n-1]+input[n-1][n-1]+input[n-1][0]);
     
-    if(n%2!=0){
-        sum-=input[n/2][n/2];
-    }
-    return sum;
+if(n%2!=0){
+	sum-=input[n/2][n/2];
+}
+return sum;
 
 
 
