@@ -55,7 +55,8 @@ using namespace std;
 bool checkRedundantBrackets(string str) {
 	// Write your code here
 
-	stack<int>s;
+	//stack<int>s;
+	stack<char>s;
 	for(int i=0; i<str.size(); i++){
 		if(str[i]=='+' or str[i]=='-' or str[i]=='*' or str[i]=='/'){
 			s.push(str[i]);
