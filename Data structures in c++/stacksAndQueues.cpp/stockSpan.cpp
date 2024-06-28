@@ -61,7 +61,17 @@ void helper(int prices[], int n, int spans[], int m){
         else break;
     }
     spans[m] = count;
-    helper(prices, n, spans, m-1);
+    // helper(prices, n, spans, m-1);
+
+     for(int i = n-1; i>=0; i--){
+        // since there is min of today so count will be min atleast 1
+        int count = 1;
+        for(int j=i-1; j>=0; j--){
+            if(prices[i]>prices[j]) count++;
+            else break;
+        }
+        spans[i] = count;
+    }
 }
 
 void calculateSpan(int prices[], int n, int spans[]) {
