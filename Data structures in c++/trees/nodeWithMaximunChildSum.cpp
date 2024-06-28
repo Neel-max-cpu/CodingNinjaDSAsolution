@@ -88,6 +88,7 @@ int findsum(TreeNode<int>*root){
 TreeNode<int>* maxSumNode(TreeNode<int>* root) {
     // Write your code here
 
+    // method1 ---
     if(root==NULL) return NULL;
 
     int sumRoot = findsum(root);
@@ -104,6 +105,31 @@ TreeNode<int>* maxSumNode(TreeNode<int>* root) {
 
     if(sumRoot>maxi) return root;
     else return maxNode;
+
+    // method 2 ---
+    if(root == NULL) return root;
+    TreeNode<int> *ans = root;
+    int total_ans = 0;
+    queue<TreeNode<int>*> q;
+    q.push(root);
+
+    while(!q.empty()) {
+        TreeNode<int> *front = q.front();
+        q.pop();
+        int sum =0;
+        for(int i=0; i<front->children.size(); i++){
+            sum += front->children[i]->data;
+            // check 
+            if(front->children[i]!=NULL)
+                q.push(front->children[i]);
+        }
+        // make the tatal ans not the ans->data
+        if(total_ans < sum) {
+            ans = front;
+            total_ans = sum;
+        }
+    }
+    return ans;
 
 
     
