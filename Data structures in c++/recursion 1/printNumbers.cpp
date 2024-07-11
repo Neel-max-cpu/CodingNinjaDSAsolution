@@ -41,8 +41,14 @@ void fun(int n, int i){
 
 void print(int n){
     //write your code here
+ // METHOD1 ---
     fun(n,1);
     // return;
+ // METHOD2 ---
+ if (n > 0) {
+        print(n - 1);  // Recursive call before printing
+        cout << n << " ";
+    }
 }
 
 
