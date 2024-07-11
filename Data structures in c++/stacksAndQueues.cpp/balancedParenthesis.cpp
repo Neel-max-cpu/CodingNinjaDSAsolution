@@ -56,7 +56,8 @@ bool isBalanced(string s)
 {
     // Write your code here
     stack<char>a;
-    
+
+  // METHOD 1 ----
     for(int i=0; i<s.size(); i++){
         if(a.empty()){
             a.push(s[i]);
@@ -67,6 +68,27 @@ bool isBalanced(string s)
 
     if(a.empty()) return true;
     else return false;
+
+
+ // METHOD 2  ---- optimised
+  // string s1 and stack s
+ stack<char>s;
+    for(char ch:s1){
+        if(ch=='('){
+          s.push(ch);
+        }
+        else{
+            if(s.empty()) return false;
+
+            char top=s.top();
+
+            if(ch==')' && top!='('){
+                return false;
+            }
+            s.pop();
+        }
+    }
+    return s.empty();
 }
 
 int main() 
